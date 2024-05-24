@@ -5,12 +5,18 @@
     height: 70vh;
 }
 
+.squad-thomas{
+    width: 25px;
+    position: relative;
+    left: 133px; 
+    top: 7.5px;
+}
+
 .squad-player-0{
     width: 25px;
     position: relative;
     left: 133px; 
     top: 127.5px;
-    
 }
 
 .squad-player-1{
