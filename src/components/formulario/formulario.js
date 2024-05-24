@@ -116,11 +116,18 @@ function Formulario({setQuantidadeJogadoresLinha, quantidadeJogadoresLinha, mont
                         <input type="text" value={nome} onChange={(e) => setNome(e.target.value)}/>
                         <h3>Nota:</h3>
                         <input type="number" value={nota} onChange={(e) =>{
+
+                            const inputValue = e.target.value;
+
+                            // Ensure the input value is an integer
                             if(e.target.value > maxNota){
                                 toast.info(`Valor não pode ser maior que ${maxNota}`);
                             }
-                            else{
+                            else if (/^\d+$/.test(inputValue)) {
                                 setNota(e.target.value);
+                            }
+                            else{
+                                toast.info(`Valor precisa ser inteiro!`);
                             }
                         } }/>
                     </div>
