@@ -133,3 +133,7 @@ button:hover{
 .item-time li{
   margin-left: calc(3 * var(--default-spacing));
 }
+
+.link{
+  cursor: pointer;
+}

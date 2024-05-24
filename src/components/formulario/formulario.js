@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { toast } from 'react-toastify';
 import Modal from 'react-modal';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 function Formulario({setQuantidadeJogadoresLinha, quantidadeJogadoresLinha, montaTimes}){
     const maxPlayers = 10;
@@ -8,17 +10,28 @@ function Formulario({setQuantidadeJogadoresLinha, quantidadeJogadoresLinha, mont
     const playersSession = 'PLAYERS';
     const [modalIsOpen, setModalIsOpen] = useState(false);
     
-    function openModal() {
-        setModalIsOpen(true);
-    }
-    
-    function closeModal() {
-        setModalIsOpen(false);
-    }
-
     const[players, setPlayers] = useState(localStorage.getItem(playersSession) ? JSON.parse(localStorage.getItem(playersSession)) : []);  
     const[nome, setNome] = useState('');
     const[nota, setNota] = useState(0);
+    const[index, setIndex] = useState(-1);
+
+    function openModal() {
+        setModalIsOpen(true);
+    }
+
+    function closeModal() {
+        setNome('');
+        setNota(0);
+        setIndex(-1);
+        setModalIsOpen(false);
+    }
+
+    function openModalEdit(index) {
+        setIndex(index);
+        setNome(players[index].nome);
+        setNota(players[index].nota);
+        setModalIsOpen(true);
+    }
 
     const handleChangeInputNumber = (event) => {
         const value = event.target.value;
@@ -43,11 +56,25 @@ function Formulario({setQuantidadeJogadoresLinha, quantidadeJogadoresLinha, mont
         closeModal();
     }
 
+    function editaJogador(index){
+        openModal();
+        setPlayers([
+            ...players.slice(0, index),
+            { nome: nome, nota: nota},
+            ...players.slice(index+1),
+        ]);
+
+        closeModal();
+    }
+
     function removeJogador(index){
         setPlayers([
             ...players.slice(0, index),
             ...players.slice(index+1),
         ]);
+        setNome('');
+        setNota(0);
+        setIndex(-1);
     }
 
     function montarTimes(){
@@ -98,7 +125,12 @@ function Formulario({setQuantidadeJogadoresLinha, quantidadeJogadoresLinha, mont
                         } }/>
                     </div>
                     <div className="modal-options">
-                        <button onClick={() => adicionaJogador()}>Adicionar</button>
+                        {
+                            index == -1 ?
+                            <button onClick={() => adicionaJogador()}>Adicionar</button>
+                            :
+                            <button onClick={() => editaJogador(index)}>Editar</button>
+                        }
                     </div>
                 </div>
             </Modal>
@@ -118,7 +150,10 @@ function Formulario({setQuantidadeJogadoresLinha, quantidadeJogadoresLinha, mont
                             (
                                 <div key={index} className="players-item">
                                     <h3>{index+1}: {item.nome} ({item.nota})</h3>
-                                    <button onClick={() => removeJogador(index)}>Remover</button>
+                                    <div>
+                                        <EditIcon className="link" onClick={() => openModalEdit(index)}/>
+                                        <DeleteForeverIcon className="link" onClick={() => removeJogador(index)}/>
+                                    </div>
                                 </div>
                             )
                         )
