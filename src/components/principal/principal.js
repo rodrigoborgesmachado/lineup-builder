@@ -21,7 +21,7 @@ function Principal(){
             }
         })
         .catch(() => {
-            toast.warn('Erro ao buscar questão');
+            toast.warn('Erro ao buscar time');
         })
     }
 
