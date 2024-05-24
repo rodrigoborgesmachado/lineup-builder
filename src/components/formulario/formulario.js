@@ -123,7 +123,7 @@ function Formulario({setQuantidadeJogadoresLinha, quantidadeJogadoresLinha, mont
                             if(e.target.value > maxNota){
                                 toast.info(`Valor não pode ser maior que ${maxNota}`);
                             }
-                            else if (/^\d+$/.test(inputValue)) {
+                            else if (/^\d+$/.test(inputValue) || inputValue == '') {
                                 setNota(e.target.value);
                             }
                             else{
