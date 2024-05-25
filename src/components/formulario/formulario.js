@@ -132,6 +132,7 @@ function Formulario({setQuantidadeJogadoresLinha, quantidadeJogadoresLinha, mont
                         } }/>
                     </div>
                     <div className="modal-options">
+                        <button onClick={() => closeModal()}>Cancelar</button>
                         {
                             index == -1 ?
                             <button onClick={() => adicionaJogador()}>Adicionar</button>
@@ -167,12 +168,12 @@ function Formulario({setQuantidadeJogadoresLinha, quantidadeJogadoresLinha, mont
                     }
                 </div>
                 <div className="confirm-option">
-                    <button onClick={openModal}>Adicionar Jogador</button>
+                    <button className="button-vini button-style2" onClick={openModal}>Adicionar Jogador</button>
                 </div>
             </div>
             
             <div className="confirm-option">
-                <button className="button-confirm" onClick={montarTimes}>Montar Times</button>
+                <button className="button-vini button-confirm" onClick={montarTimes}>Montar Times</button>
             </div>
         </div>
     )

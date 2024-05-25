@@ -1,6 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter');
 :root {
   /* Cor do background */
-  --background-color: #2B2C33;
+  --background-color: #14142B;
   --separator-color-primary: rgba(173, 179, 187, 0.48);
   /* Cor do header, footer e outros elementos principais */
   --primary-color: #2E3246;
@@ -8,11 +9,14 @@
   /* Cor dos painéis */
   --secundary-color: #384170;
 
+  --black2:#181829;
+
   /* Cor do texto nos painéis */
-  --text-color-primary-light: #cdd7f7;
+  --text-color-primary-light: #FFFFFF;
+  --text-color-secondary-light: #65656B;
 
   /* Cores do botão principal */
-  --button-color-primary: #34439B;
+  --button-color-primary: #246BFD;
   --button-color-primary-hover: #213AC5;
 
   /* Espaçamentos padrões */
@@ -28,7 +32,7 @@
 
 body {
   margin: 0;
-  font-family: sans-serif;
+  font-family: "Inter", sans-serif !important;
   color: var(--text-color-primary-light);
   background-color: var(--background-color);
   -webkit-font-smoothing: antialiased;
@@ -38,16 +42,27 @@ body {
   text-align: justify;
 }
 
+input{
+  border: none;
+  background-color: var(--black2);
+  color: var(--text-color-primary-light);
+}
+
 .app{
   margin: auto;
   width: 360px;
+  margin-bottom: 16px;
 }
 
 .app h1{
   margin-top: 8px;
-  margin-bottom: 32px;
+  margin-bottom: 16px;
   width: 100%;
   justify-content: center;
+}
+
+.main_title{
+
 }
 
 button{
@@ -56,6 +71,7 @@ button{
   border-radius: var(--default-border-radius);
   color: var(--text-color-primary-light);
   cursor: pointer;
+  border: none;
 }
 
 button:hover{
@@ -65,12 +81,18 @@ button:hover{
 }
 
 .div-pattern{
-  margin: calc(2 * var(--default-spacing));
+  /* margin: calc(2 * var(--default-spacing)); */
   padding: calc(2 * var(--default-spacing));
   display: flex;
   flex-direction: column;
   border: 1px solid var(--separator-color-primary);
   border-radius: var(--default-border-radius);
+}
+
+.form-players{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .form-players input{
@@ -80,28 +102,38 @@ button:hover{
 }
 
 .config input{
-  margin: 8px;
+  margin-top: 8px;
 }
 
 .form-players h2{
-  margin: 8px;
+  /* margin: calc(2 * var(--default-spacing)); */
 }
 
 .players-item{
   display: flex;
-  margin: 16px;
+  margin: 8px;
   justify-content: space-between;
+  border-bottom: 1px solid #222232;
 }
 
 .confirm-option, .modal-options{
   display: flex;
-  margin: 16px;
   align-items: center;
   justify-content: center;
+  gap: 20px;
 }
 
 .button-confirm{
   width: 50%;
+}
+
+.button-vini{
+  width: 100%;
+}
+
+.button-style2{
+  background: rgb(244,165,138);
+background: linear-gradient(90deg, rgba(244,165,138,1) 0%, rgba(237,107,78,1) 100%);
 }
 
 .modal-body{
@@ -121,7 +153,9 @@ button:hover{
 }
 
 .times{
-  margin: 16px 0 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .item-time{
