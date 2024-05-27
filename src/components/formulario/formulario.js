@@ -3,15 +3,18 @@ import { toast } from 'react-toastify';
 import Modal from 'react-modal';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import PublishIcon from '@mui/icons-material/Publish';
 
 function Formulario({setQuantidadeJogadoresLinha, quantidadeJogadoresLinha, montaTimes}){
     const maxPlayers = 10;
     const maxNota = 4;
     const playersSession = 'PLAYERS';
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [modalImportIsOpen, setModalImportIsOpen] = useState(false);
     
     const[players, setPlayers] = useState(localStorage.getItem(playersSession) ? JSON.parse(localStorage.getItem(playersSession)) : []);  
     const[nome, setNome] = useState('');
+    const[lista, setlista] = useState('');
     const[nota, setNota] = useState(0);
     const[index, setIndex] = useState(-1);
 
@@ -24,6 +27,14 @@ function Formulario({setQuantidadeJogadoresLinha, quantidadeJogadoresLinha, mont
         setNota(0);
         setIndex(-1);
         setModalIsOpen(false);
+    }
+
+    function openModalImport() {
+        setModalImportIsOpen(true);
+    }
+
+    function closeModalImport() {
+        setModalImportIsOpen(false);
     }
 
     function openModalEdit(index) {
@@ -101,6 +112,40 @@ function Formulario({setQuantidadeJogadoresLinha, quantidadeJogadoresLinha, mont
         };
     }
 
+    function extractPlayers() {
+        const lines = lista.split('\n');
+        const players = [];
+        let isInLinhaSection = false;
+        
+
+        for (let line of lines) {
+          line = line.trim();
+      
+          if (line.startsWith("Linha")) {
+            isInLinhaSection = true;
+            continue;
+          }
+      
+          if (line.startsWith("Espera")) {
+            break;
+          }
+      
+          if (isInLinhaSection && line) {
+            const match = line.match(/^(\d+)\s*-\s*(.+?)(?:\s+(\d))?$/);
+      
+            if (match) {
+              const nota = match[3] ? (match[3] > 0 && match[3] <= 4 ? match[3] : 1) : 1;
+              const nome = match[2].trim();
+              players.push({ nota, nome });
+            }
+          }
+        }
+
+        setPlayers(players);
+        setlista('');
+        closeModalImport();
+      }
+
     return(
         <div className="form-players">
             <Modal
@@ -142,6 +187,24 @@ function Formulario({setQuantidadeJogadoresLinha, quantidadeJogadoresLinha, mont
                     </div>
                 </div>
             </Modal>
+            <Modal
+                isOpen={modalImportIsOpen}
+                onRequestClose={closeModalImport}
+                ariaHideApp={false}
+                style={customStyles()}
+                contentLabel="Jogador"
+            >
+                <div className="modal-body">
+                    <div className="modal-form">
+                        <h3>Lista:</h3>
+                        <textarea type="text" value={lista} onChange={(e) => setlista(e.target.value)} rows={20} cols={40}/>
+                    </div>
+                    <div className="modal-options">
+                        <button onClick={() => closeModalImport()}>Cancelar</button>
+                        <button onClick={() => extractPlayers()}>Importar</button>
+                    </div>
+                </div>
+            </Modal>
             <h2>Informações</h2>
             <div className="div-pattern">
                 <div className="config">
@@ -151,6 +214,10 @@ function Formulario({setQuantidadeJogadoresLinha, quantidadeJogadoresLinha, mont
             </div>
 
             <h2>Jogadores:</h2>
+            <div className="separe-itens link" onClick={openModalImport} >
+                <h3>Importar</h3>
+                <PublishIcon label='Importar lista'/>
+            </div>
             <div className="div-pattern">
                 <div className="players">
                     {

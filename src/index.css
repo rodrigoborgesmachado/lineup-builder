@@ -171,3 +171,7 @@ background: linear-gradient(90deg, rgba(244,165,138,1) 0%, rgba(237,107,78,1) 10
 .link{
   cursor: pointer;
 }
+
+.separe-itens{
+  display: flex;
+}
