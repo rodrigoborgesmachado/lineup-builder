@@ -134,7 +134,7 @@ function Formulario({setQuantidadeJogadoresLinha, quantidadeJogadoresLinha, mont
             const match = line.match(/^(\d+)\s*-\s*(.+?)(?:\s+(\d))?$/);
       
             if (match) {
-              const nota = match[3] ? (match[3] > 0 && match[3] <= 4 ? match[3] : 1) : 1;
+              const nota = match[3] ? (match[3] > 0 && match[3] <= maxNota ? match[3] : 1) : 1;
               const nome = match[2].trim();
               players.push({ nota, nome });
             }
