@@ -7,7 +7,7 @@ import PublishIcon from '@mui/icons-material/Publish';
 
 function Formulario({setQuantidadeJogadoresLinha, quantidadeJogadoresLinha, montaTimes}){
     const maxPlayers = 10;
-    const maxNota = 4;
+    const maxNota = 5;
     const playersSession = 'PLAYERS';
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [modalImportIsOpen, setModalImportIsOpen] = useState(false);
