@@ -37,7 +37,7 @@ function Times({times, setIsFormulario}){
             <div>
                 {
                     times.map((item, i) => (
-                        <div className="div-pattern" key={i}>
+                        <div className="div-pattern div-space" key={i}>
                             <h3>Time {i + 1}:</h3>
                             <Squad playears={item.playears}/>
                         </div>

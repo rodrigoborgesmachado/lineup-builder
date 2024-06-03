@@ -175,3 +175,7 @@ background: linear-gradient(90deg, rgba(244,165,138,1) 0%, rgba(237,107,78,1) 10
 .separe-itens{
   display: flex;
 }
+
+.div-space{
+  margin-bottom: 16px;
+}
