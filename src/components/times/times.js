@@ -19,6 +19,8 @@ function Times({times, setIsFormulario}){
             })
         });
 
+        texto += '\n\nDisponível em https://montatime.netlify.app/';
+
         return texto;
     }
 

@@ -61,10 +61,6 @@ input{
   justify-content: center;
 }
 
-.main_title{
-
-}
-
 button{
   background-color: var(--button-color-primary);
   padding: var(--default-spacing);
@@ -81,7 +77,6 @@ button:hover{
 }
 
 .div-pattern{
-  /* margin: calc(2 * var(--default-spacing)); */
   padding: calc(2 * var(--default-spacing));
   display: flex;
   flex-direction: column;
@@ -103,10 +98,6 @@ button:hover{
 
 .config input{
   margin-top: 8px;
-}
-
-.form-players h2{
-  /* margin: calc(2 * var(--default-spacing)); */
 }
 
 .players-item{
